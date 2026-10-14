@@ -3,7 +3,15 @@ import numpy as np
 import pandas as pd
 import joblib
 import streamlit as st
+import subprocess
+import sys
 
+# Paksa install imbalanced-learn jika belum ada di server
+try:
+    import imblearn
+except ImportError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "imbalanced-learn"])
+    import imblearn
 # ==========================================================
 # 1. KONFIGURASI HALAMAN
 # ==========================================================
@@ -69,7 +77,6 @@ def load_components():
 
 
 scaler, model, status = load_components()
-
 
 # ==========================================================
 # 4. PREPROCESSING INFERENSI (urutan sama dengan pelatihan)
